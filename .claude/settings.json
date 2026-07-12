@@ -1,0 +1,44 @@
+{
+  "hooks": {
+    "pre_tool_call": {
+      "bash": {
+        "command": "echo '[spec-forge] Tool call: ${TOOL_NAME}' >> progress/current.md"
+      }
+    },
+    "post_tool_call": {
+      "bash": {
+        "command": "echo '[spec-forge] Tool completed: ${TOOL_NAME}' >> progress/current.md"
+      }
+    }
+  },
+  "agents": {
+    "leader": {
+      "file": "agents/leader.md",
+      "description": "Orchestrator — never implements, never approves"
+    },
+    "business_analyst": {
+      "file": "agents/business_analyst.md",
+      "description": "Business context, stakeholders, value"
+    },
+    "product_owner": {
+      "file": "agents/product_owner.md",
+      "description": "User stories, acceptance criteria, scope"
+    },
+    "tech_architect": {
+      "file": "agents/tech_architect.md",
+      "description": "Feasibility, dependencies, constraints"
+    },
+    "qa_lead": {
+      "file": "agents/qa_lead.md",
+      "description": "Test scenarios, edge cases, quality"
+    },
+    "ux_designer": {
+      "file": "agents/ux_designer.md",
+      "description": "User experience, flows, accessibility"
+    },
+    "security_analyst": {
+      "file": "agents/security_analyst.md",
+      "description": "Security, compliance, threats"
+    }
+  }
+}

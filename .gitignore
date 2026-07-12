@@ -1,0 +1,21 @@
+# spec-forge — .gitignore
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Spec output (per-feature, should be committed)
+# specs/ is tracked
+
+# Progress (session state, should be committed)
+# progress/ is tracked
+
+# Memory (persistent, should be committed)
+# memory/ is tracked
