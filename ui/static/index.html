@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>spec-forge</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1 class="logo">spec-forge</h1>
+                <span class="subtitle">Requirements to Ready for Dev</span>
+            </div>
+            <div class="header-right">
+                <span id="provider-badge" class="badge"></span>
+                <button id="btn-memory" class="btn btn-ghost" onclick="showMemory()">Memory</button>
+                <button id="btn-new-feature" class="btn btn-primary" onclick="showNewFeature()">+ New Feature</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main id="main-content">
+            <!-- Dashboard (default view) -->
+            <div id="view-dashboard" class="view active">
+                <div class="section-header">
+                    <h2>Features</h2>
+                </div>
+                <div id="features-list" class="features-grid"></div>
+            </div>
+
+            <!-- Feature View -->
+            <div id="view-feature" class="view">
+                <div class="feature-header">
+                    <button class="btn btn-ghost" onclick="showDashboard()">← Back</button>
+                    <h2 id="feature-title"></h2>
+                    <span id="feature-status" class="badge"></span>
+                </div>
+
+                <!-- Phase Pipeline -->
+                <div id="phase-pipeline" class="pipeline"></div>
+
+                <!-- File Editor -->
+                <div id="file-editor" class="editor-container" style="display:none;">
+                    <div class="editor-header">
+                        <h3 id="editor-filename"></h3>
+                        <div class="editor-actions">
+                            <button class="btn btn-ghost" onclick="toggleEditorMode()">Toggle Source/Preview</button>
+                            <button class="btn btn-primary" onclick="saveFile()">Save</button>
+                            <button class="btn btn-secondary" onclick="openChat()">Chat with Agent</button>
+                        </div>
+                    </div>
+                    <div class="editor-body">
+                        <div id="editor-preview" class="editor-pane">
+                            <div id="preview-content" class="markdown-body"></div>
+                        </div>
+                        <div id="editor-source" class="editor-pane">
+                            <textarea id="source-editor" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Memory View -->
+            <div id="view-memory" class="view">
+                <div class="feature-header">
+                    <button class="btn btn-ghost" onclick="showDashboard()">← Back</button>
+                    <h2>Memory</h2>
+                </div>
+                <div class="memory-tabs">
+                    <button class="tab active" data-tab="decisions" onclick="switchMemoryTab('decisions')">Decisions</button>
+                    <button class="tab" data-tab="stakeholders" onclick="switchMemoryTab('stakeholders')">Stakeholders</button>
+                    <button class="tab" data-tab="patterns" onclick="switchMemoryTab('patterns')">Patterns</button>
+                    <button class="tab" data-tab="context" onclick="switchMemoryTab('context')">Context</button>
+                </div>
+                <div class="memory-editor">
+                    <textarea id="memory-editor" spellcheck="false"></textarea>
+                    <button class="btn btn-primary" onclick="saveMemory()">Save</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Agent Chat Panel (sidebar) -->
+        <div id="chat-panel" class="chat-panel" style="display:none;">
+            <div class="chat-header">
+                <h3 id="chat-agent-name"></h3>
+                <button class="btn btn-ghost" onclick="closeChat()">×</button>
+            </div>
+            <div id="chat-messages" class="chat-messages"></div>
+            <div class="chat-input">
+                <textarea id="chat-input" placeholder="Type your message..." rows="2"></textarea>
+                <button class="btn btn-primary" onclick="sendChatMessage()">Send</button>
+            </div>
+        </div>
+
+        <!-- New Feature Modal -->
+        <div id="modal-new-feature" class="modal" style="display:none;">
+            <div class="modal-content">
+                <h3>New Feature</h3>
+                <form onsubmit="createFeature(event)">
+                    <div class="form-group">
+                        <label>Feature Name</label>
+                        <input type="text" id="new-feature-name" required placeholder="e.g., auth-system">
+                    </div>
+                    <div class="form-group">
+                        <label>Requirement Description</label>
+                        <textarea id="new-feature-desc" rows="4" required placeholder="Describe the requirement..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

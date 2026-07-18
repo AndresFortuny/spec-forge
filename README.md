@@ -62,7 +62,11 @@ spec-forge/
 ├── docs/                  # Reference documentation
 ├── specs/<feature>/       # Output per feature
 ├── progress/              # Session state
-└── memory/                # Persistent memory (human-editable)
+├── memory/                # Persistent memory (human-editable)
+└── ui/                    # Web UI (optional)
+    ├── server.py          # FastAPI backend
+    ├── static/            # Frontend (HTML/CSS/JS)
+    └── README.md          # UI documentation
 ```
 
 ## Memory
@@ -76,11 +80,35 @@ spec-forge includes persistent memory that survives across sessions:
 
 **Humans can edit memory directly.** The agents read it at the start of each session.
 
+## Web UI (Optional)
+
+spec-forge includes an optional web interface for visualizing and editing outputs:
+
+```bash
+cd ui
+pip install -r requirements.txt
+cp .env.example .env  # Configure your LLM provider
+python server.py
+# Open http://localhost:8000
+```
+
+The UI supports:
+- **Dashboard**: View all features and their status
+- **Feature View**: See the phase pipeline and output files
+- **File Editor**: Edit spec files with markdown preview
+- **Memory Editor**: View and edit persistent memory
+- **Agent Chat**: Chat with specialist agents for adjustments
+
+LLM providers: Ollama (default, free), OpenAI, Anthropic, Groq, Gemini.
+
+See `ui/README.md` for details.
+
 ## Compatibility
 
 - **LLM-agnostic**: Works with Claude, GPT, Gemini, Cursor, or any markdown-capable agent
 - **Framework-agnostic**: No Python, Node, or other dependencies
 - **harness-sdd compatible**: Output can be consumed directly by harness-sdd
+- **Web UI**: Optional web interface with multi-provider LLM support
 
 ## License
 
